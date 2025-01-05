@@ -1,27 +1,28 @@
-import { expect, test } from '@playwright/test';
-
-let xpathUserName = '//input[@id="user_login"]';
-let xpathPassWord = '//input[@id="user_pass"]';
-let xpathBtnSubmit = '//input[@id="wp-submit"]';
-let xpathMenuMedia = "//div[text()='Media']";
-let xpathMenuLibrary = "//a[text()='Library']";
-let xpathBtnAddNewMediaFile = "//a[@class='page-title-action aria-button-if-js']";
-
-let xpathBtnSelectFiles = "//input[@type='file']";
+import { log } from 'console';
+import { LoginPage } from './../../page/login-page';
+import { expect, Page, test } from '@playwright/test';
+import { LibraryPage } from '../../page/library-page';
 
 test.describe('MEDIA-Media', async () => {
+    let xpathUserName = '//input[@id="user_login"]';
+    let xpathPassWord = '//input[@id="user_pass"]';
+    let xpathBtnSubmit = '//input[@id="wp-submit"]';
+    let xpathMenuMedia = "//div[text()='Media']";
+    let xpathMenuLibrary = "//a[text()='Library']";
+    let xpathBtnAddNewMediaFile = "//a[@class='page-title-action aria-button-if-js']";
+    let xpathBtnSelectFiles = "//input[@type='file']";
     const fileName = 'thu.txt';
     const filePath = 'D:\\pw-course\\data-test\\thu.txt';
+    const username = '1107-thu';
+    const password = 'HV%MhRjgyljzRDnxZCB(^Wl&';
 
     test.beforeEach(async ({ page }) => {
-        const username = '1107-thu';
-        const password = 'HV%MhRjgyljzRDnxZCB(^Wl&';
-
         await test.step('Go to Media Library', async () => {
-            await page.goto('https://pw-practice-dev.playwrightvn.com/wp-admin');
-            await page.locator(xpathUserName).fill(username);
-            await page.locator(xpathPassWord).fill(password);
-            await page.locator(xpathBtnSubmit).click();
+            await LoginPage.login(username, password);
+            await page.waitForLoadState('load');
+            
+            
+
             await page.locator(xpathMenuMedia).click();
             await page.locator(xpathMenuLibrary).click();
         });
@@ -46,3 +47,6 @@ test.describe('MEDIA-Media', async () => {
         });
     });
 });
+function evaluateClickByXpath(page: Page, arg1: string) {
+    throw new Error('Function not implemented.');
+}

@@ -2,6 +2,12 @@ import { Page } from '@playwright/test';
 import { BasePage } from './base-page';
 
 export class TagPage extends BasePage {
+    static fillTagName(arg0: string) {
+        throw new Error('Method not implemented.');
+    }
+    static clickBtnAddNewTag() {
+        throw new Error('Method not implemented.');
+    }
     //thuộc tính
     xpathInputTagName = '#input_tag';
     xpathInputSlug = '#slug';

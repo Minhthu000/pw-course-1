@@ -2,6 +2,9 @@ import { Page } from '@playwright/test';
 import { BasePage } from './base-page';
 
 export class LoginPage extends BasePage {
+    static login(username: string, password: string) {
+        throw new Error('Method not implemented.');
+    }
     // thuộc tính
     xpathUserName = '#user_name';
     xpathPassword = '#password';
