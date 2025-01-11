@@ -43,12 +43,6 @@ test.describe('Test case', () => {
         });
 
         await test.step(' Xoá “Comment 02”, “Comment 05” đã tạo', async () => {
-            // for in
-            // for i < n
-            // foreach
-            // map
-            // ......
-            // duyệt mảng comment cần xóa: comment 02, comment 05
             for (const comment of commentsToDelete) {
                 const cardByText = await page.getByText(comment, { exact: true }); // card-text
                 const iconDelete = await cardByText
