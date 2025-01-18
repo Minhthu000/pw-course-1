@@ -166,3 +166,58 @@ await expect(elem).toHaveText(''); -> Kiểm tra phần tử có text hay không
 await expect(elem).toHaveValue(''); -> Kiểm tra input có chứa giá trị hay không
 
 await expect(elem).toHaveValues([]) -> Kiểm tra select có select các option hay không
+
+# \*\*Lesson 3: Class extends & Page Object Model
+
+## 1. Class: extends
+
+-   Sử dụng extends để kế thừa (giúp tái sử dụng các thuộc tính của phần tử cha)
+
+-   Hàm tạo (constructor) là hàm sẽ chạy khi bạn khởi tạo một object.
+
+-   Ex: class A extends class B {​
+    constructor() {​
+    super()​
+    }​
+    }​
+    => class A là class con, class B là class cha​
+    super = gọi tới hàm tạo của class cha​
+
+**Export**
+
+-   Từ khoá export giúp chúng ta có thể xuất 1 biến, 1 hằng số ở 1 file và nhập (import) dùng ở file khác.
+
+-   Ví dụ:
+    Tại file login-page.ts
+    export class LoginPage {
+    // Some code...
+    }
+    Tại file test.spec.ts
+    import { LoginPage } from './page/login-page';
+    // Some code...
+
+**Lưu ý:**
+
+-   Cấu trúc thư mục:
+    ├── test.spec.ts
+    ├── page
+    │ ├── login-page.ts
+-   from './page/login-page'; là đường dẫn để đi tới login-page cần import. Do login-page này nằm trong thư mục page nên cần định nghĩa vào trong import.
+-   Ta có thể viết from './page/login-page.ts'; hoặc bỏ đuôi .ts trong phần import: from './page/login-page';, vì Javascript sẽ tự động thêm đuôi .ts khi tìm kiếm
+-   Để import file nằm ở thư mục bên ngoài, ta dùng .. để đi ra folder cha của folder hiện tại.
+    VD: ‘../../login-page.ts'
+
+## 2. POM
+
+-   POM = Page Object Model
+
+-   POM giúp code tổ chức gọn gàng hơn, dễ bảo trì hơn
+
+-   POM gồm 2 thành phần chính:
+
+    -   Các thuộc tính (property): đại diện cho các phần tử trên trang.
+    -   Các phương thức (method): đại diện cho các hành động trên trang.
+
+-   Hàm tạo của POM thường có thuộc tính page. Ta sẽ dùng page này để tương tác với trang web.
+
+-   Thuộc tính page này nếu đã xuất hiện trong POM cha rồi thì bạn không cần định nghĩa ở POM con nữa.
